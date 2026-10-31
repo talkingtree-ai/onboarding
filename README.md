@@ -4,7 +4,7 @@ An optional, self-paced introduction to technologies relevant to TalkingTree eng
 
 Use this material on your own computer or a disposable local VM. No company GitHub membership, credentials, infrastructure access, customer data, paid API, or cloud account is required for the core path. The examples are original teaching projects with synthetic data. The architecture guide describes technology categories, rather than company deployment instructions.
 
-This is self-study material. There are no deadlines, submissions, hiring evaluations, or requests to perform company work. Access to company systems and any formal onboarding are separate processes. This repository makes no determination about audit requirements or employment arrangements.
+This is optional self-study material with no deadlines, submissions, or requests to perform company work. Formal company access and onboarding follow separate processes.
 
 ## Start here
 

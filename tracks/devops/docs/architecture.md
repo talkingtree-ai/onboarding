@@ -2,14 +2,14 @@
 
 This is optional self-study using public tools and synthetic examples. There are no submissions, deadlines, company accounts, or production tasks. The diagrams are teaching models, not TalkingTree deployment diagrams.
 
-## What transfers to TalkingTree
+## Technologies to explore
 
-The technology names below reflect a technology-level inventory. Versions, deployment placement, access rules, service relationships, and the currently active production topology are deliberately not represented. No internal configuration or application code is included.
+The technology names below introduce common platform concepts through independent teaching examples. They do not describe an organization's deployment placement, access rules, service relationships, or production topology. No internal configuration or application code is included.
 
 | Technology area | Relevant technologies | What to understand | Training treatment |
 | --- | --- | --- | --- |
-| Applications | Next.js/Node.js, FastAPI/Python, Flask-based document processing | Build artifacts, runtime configuration, dependency health, request timeouts, temporary files | A tiny original HTTP service teaches packaging and health; it does not reproduce any product workflow |
-| Application data | MongoDB, Qdrant, Valkey, S3-compatible object storage | Durable state, indexes, caches, object keys, credentials, restore boundaries | Synthetic data and optional [stateful exercises](stateful-services.md) |
+| Applications | Next.js/Node.js, FastAPI/Python, Flask/Python services | Build artifacts, runtime configuration, dependency health, request timeouts, temporary files | A tiny original HTTP service teaches packaging and health; it does not reproduce any product workflow |
+| Application data | MongoDB, Qdrant, S3-compatible object storage, and Valkey | Durable state, indexes, caches, object references, recovery | Synthetic data and optional [stateful exercises](stateful-services.md) |
 | Containers | Docker, Compose, containerd | Image versus running container, networks, volumes, runtime ownership | [Containers lab](../labs/01-containers/); K3s uses its own runtime |
 | Cluster delivery | K3s, Kubernetes, Flux, Kustomize, Helm | Desired state, controllers, health, drift, release recovery | [K3s](../labs/03-k3s/) and [Flux](../labs/04-flux/) on a local disposable cluster |
 | Platform resources | Terraform; cloud networking, compute, registries, storage, identity | Plans, state, ownership, dependency graphs | [Terraform lab](../labs/02-terraform/) uses local resources; cloud services are reading only |
@@ -27,7 +27,7 @@ flowchart LR
   Edge --> Ingress[Ingress / reverse proxy]
   Ingress --> Web[Web frontend]
   Web --> API[Application API]
-  API --> Worker[Document processing service]
+  API --> Worker[Background worker]
   API --> DB[(Document database)]
   API --> Vector[(Vector index)]
   API --> Cache[(Cache / ephemeral data)]
@@ -57,9 +57,9 @@ Define one owner for each resource. For example, Terraform might create a machin
 
 ## Cloud vocabulary without cloud provisioning
 
-The platform inventory includes AWS service families and Cloudflare/Auth0 configuration. These names are useful vocabulary, not instructions to create resources. The labs contain no AWS credentials or cloud deployment path. Local simulations do not reproduce managed-service security, resilience, or billing behavior.
+AWS service families and Cloudflare/Auth0 provide useful examples of platform vocabulary. These names are reading topics, not instructions to create resources or a description of company infrastructure. The labs contain no AWS credentials or cloud deployment path. Local simulations do not reproduce managed-service security, resilience, or billing behavior.
 
-| Cloud concepts encountered in infrastructure code | Local learning equivalent | Important gap |
+| Cloud concepts for further reading | Local learning equivalent | Important gap |
 | --- | --- | --- |
 | VPC, subnets, security groups, EC2, IAM, SSM | VM, container networks, firewall policy, Linux users, process supervisor | A Docker network is not a VPC; root access is not an IAM role |
 | ECR | Local image store or local registry | Registry authentication, regional availability, and retention need separate study |

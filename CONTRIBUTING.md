@@ -8,7 +8,7 @@ Explain its learning objective, prerequisites, expected result, failure symptoms
 
 Run `python3 scripts/verify.py`. Perform the relevant runtime checks on your own disposable environment after changing runtime files. Update [VALIDATION.md](VALIDATION.md) with what actually ran, tool versions, and what remains untested. A static YAML parse is not a Kubernetes or Flux integration test.
 
-Review updates to upstream image tags, tool releases, security support, and account terms before distributing a new revision. Tagged images are easier to inspect than `latest`, but tags can move; a more advanced exercise can pin a verified multi-architecture digest. Third-party tools retain their own licenses. No open-source license or publication destination has been selected for this repository yet.
+Review updates to upstream image tags, tool releases, security support, and account terms before distributing a new revision. Tagged images are easier to inspect than `latest`, but tags can move; a more advanced exercise can pin a verified multi-architecture digest. Third-party tools retain their own licenses. This educational repository is published through GitHub and GitHub Pages; it contains no company application source or private assets. An open-source license for the original material has not been selected.
 
 ## Before sharing a copy
 
@@ -23,7 +23,7 @@ git log --oneline --all
 git archive --format=zip --output=../onboarding-materials.zip HEAD
 ```
 
-Run that command only when you intend to make a shareable archive. It creates a local file and does not upload it. Review the archive's contents before distributing it. Omit `.git/` and all local lab state. Decide licensing and distribution permissions with the repository owner before a public release.
+Run that command only when you intend to make a shareable archive. It creates a local file and does not upload it. Review the archive's contents before distributing it. Omit `.git/` and all local lab state. Public updates must preserve the same separation from private company material; see the [public-release review](PUBLIC-RELEASE.md).
 
 ## Adding another track
 

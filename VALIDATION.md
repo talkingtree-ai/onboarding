@@ -40,6 +40,21 @@ Lab 07 was verified on Linux amd64 with Compose v5.6.0, Traefik v3.7.17, and Cor
 
 Testing corrected host-port publication by separating the internal backend network from the proxy/DNS bridge. CoreDNS retains its binary's declared `NET_BIND_SERVICE` capability to permit startup; other capability drops, non-root execution, and read-only roots remain configured. The lab documents this image-specific behavior. No public DNS record, company domain, default resolver, hosts file, or trust store was changed. The existing K3s/Flux runtime was unaffected and was not repeated for this extension.
 
+## Public documentation site
+
+The Pages release received an independent current-file and Git-history review,
+plus Gitleaks scans of the source, staged Markdown, and generated website. No
+actual secrets, private infrastructure identifiers, or proprietary source were
+found. Current source and website scans reported zero findings; the historical
+English-text false positive is documented in [the release review](PUBLIC-RELEASE.md).
+
+The pinned documentation environment passed dependency checks and a strict build
+of 32 reviewed source pages plus third-party notices. Rendered local links and
+fragment anchors were checked. Browser verification covered the homepage, local
+search results, navigation to a lab, code copying, and a narrow-screen navigation
+drawer. The presentation uses original styles and public theme assets. No lab
+runtime or shared application service was changed for the website work.
+
 ## Repeat relevant checks
 
 From the repository root:

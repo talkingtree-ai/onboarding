@@ -2,6 +2,7 @@
 """Offline repository checks. Never starts a service or contacts a cluster."""
 
 import ast
+import os
 from pathlib import Path
 import re
 import shutil
@@ -11,8 +12,8 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIP_DIRS = {".git", ".local", ".terraform", ".venv", "__pycache__", "backups"}
-TEXT_SUFFIXES = {".md", ".py", ".sh", ".tf", ".yaml", ".yml", ".example"}
+SKIP_DIRS = {".git", ".local", ".terraform", ".venv", ".venv-docs", ".site", ".site-src", "__pycache__", "backups"}
+TEXT_SUFFIXES = {".md", ".py", ".sh", ".tf", ".yaml", ".yml", ".example", ".css", ".svg", ".json", ".html", ".txt"}
 SENSITIVE_PATTERNS = (
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     re.compile(r"\bAKIA[A-Z0-9]{16}\b"),
@@ -25,15 +26,19 @@ SENSITIVE_PATTERNS = (
 def main():
     errors = []
     files = []
-    for path in ROOT.rglob("*"):
-        relative = path.relative_to(ROOT)
-        if any(part in SKIP_DIRS for part in relative.parts):
-            continue
-        if path.is_symlink():
-            errors.append(f"{relative}: unexpected symlink; review before sharing")
-            continue
-        if path.is_file():
-            files.append(path)
+    for directory, subdirectories, filenames in os.walk(ROOT):
+        subdirectories[:] = [name for name in subdirectories if name not in SKIP_DIRS]
+        for name in list(subdirectories):
+            path = Path(directory) / name
+            if path.is_symlink():
+                errors.append(f"{path.relative_to(ROOT)}: unexpected symlink; review before sharing")
+                subdirectories.remove(name)
+        for name in filenames:
+            path = Path(directory) / name
+            if path.is_symlink():
+                errors.append(f"{path.relative_to(ROOT)}: unexpected symlink; review before sharing")
+            elif path.is_file():
+                files.append(path)
 
     for path in files:
         relative = path.relative_to(ROOT)

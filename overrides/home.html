@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="onboarding-home">
+  <section class="learning-hero" aria-labelledby="learning-title">
+    <p class="learning-eyebrow">TalkingTree · Engineering onboarding</p>
+    <h1 id="learning-title" class="learning-title">Learn by running it.</h1>
+    <p class="learning-intro">Explore the foundations of a modern platform, one small local experiment at a time.</p>
+    <div class="learning-actions">
+      <a class="md-button md-button--primary" href="{{ 'tracks/devops/' | url }}">Start the DevOps path <span aria-hidden="true">↗</span></a>
+      <a class="md-button" href="{{ config.repo_url }}/archive/refs/heads/main.zip">Download the labs <span aria-hidden="true">↓</span></a>
+    </div>
+    <ul class="learning-facts" aria-label="Learning format">
+      <li>Self-paced</li>
+      <li>Runs locally</li>
+      <li>No cloud bill</li>
+    </ul>
+  </section>
+
+  <section class="learning-cards" aria-label="Explore the material">
+    <a class="learning-card" href="{{ 'tracks/devops/labs/01-containers/' | url }}">
+      <span class="learning-card-label">01 / Build</span>
+      <h2>Small labs. Real concepts.</h2>
+      <p>Start with a toy service, then explore containers, Terraform, Kubernetes, and Flux.</p>
+      <span class="learning-card-link">Explore the labs <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="learning-card" href="{{ 'tracks/devops/docs/routing-and-dns/' | url }}">
+      <span class="learning-card-label">02 / Connect</span>
+      <h2>Follow the request.</h2>
+      <p>Trace DNS, TLS, and Traefik routing with private test domains on your own machine.</p>
+      <span class="learning-card-link">Understand the layers <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="learning-card" href="{{ 'tracks/devops/sops/' | url }}">
+      <span class="learning-card-label">03 / Operate</span>
+      <h2>Practice the recovery.</h2>
+      <p>Learn to observe failures, make scoped changes, roll back, and verify a restore.</p>
+      <span class="learning-card-link">Read the procedures <span aria-hidden="true">→</span></span>
+    </a>
+  </section>
+
+  <div class="learning-reading">
+    {{ page.content }}
+  </div>
+</div>
+{% endblock %}

@@ -12,4 +12,4 @@ If a credential reaches Git history, revoke or rotate it at the issuer and remov
 
 An optional Auth0 tenant belongs to the learner. Use no company tenant, branding, domain, or client registration. Account creation and current plan eligibility are the learner's choice. No login is required for the core labs.
 
-For distribution, use a reviewed archive of tracked files rather than zipping a working directory containing `.local/`. The [maintainer guide](CONTRIBUTING.md) explains the review and packaging process. There is no automated publishing, issue reporting, or notification integration in this repository.
+For distribution, use a reviewed archive of tracked files rather than zipping a working directory containing `.local/`. The [maintainer guide](CONTRIBUTING.md) explains the review and packaging process. The Pages build stages a fixed list of documentation and presentation assets; it does not publish a working directory, local profiles, or lab state. GitHub Actions builds the static documentation with repository-scoped permissions. No runtime integration calls company services.

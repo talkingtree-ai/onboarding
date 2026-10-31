@@ -1,0 +1,104 @@
+site_name: TalkingTree Onboarding
+site_description: Optional, self-paced DevOps study and local labs.
+site_url: https://talkingtree-ai.github.io/onboarding/
+repo_url: https://github.com/talkingtree-ai/onboarding
+repo_name: Get the lab files
+edit_uri: ""
+docs_dir: .site-src
+site_dir: .site
+strict: true
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  font: false
+  favicon: assets/favicon.svg
+  icon:
+    logo: material/book-open-page-variant
+    repo: fontawesome/brands/github
+  palette:
+    scheme: default
+    primary: custom
+    accent: custom
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+extra_css:
+  - assets/onboarding.css
+
+extra:
+  generator: false
+
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+
+nav:
+  - Welcome: index.md
+  - DevOps:
+      - Learning path: tracks/devops/index.md
+      - Local environment: tracks/devops/PREREQUISITES.md
+      - Labs:
+          - 01 · Containers: tracks/devops/labs/01-containers/index.md
+          - 02 · Terraform: tracks/devops/labs/02-terraform/index.md
+          - 03 · K3s: tracks/devops/labs/03-k3s/index.md
+          - 04 · Flux: tracks/devops/labs/04-flux/index.md
+          - 05 · SOPS and age: tracks/devops/labs/05-secrets/index.md
+          - 06 · Operations: tracks/devops/labs/06-operations/index.md
+          - 07 · Traefik and DNS: tracks/devops/labs/07-routing-dns/index.md
+      - Guides:
+          - Technology map: tracks/devops/docs/architecture.md
+          - Linux and networking: tracks/devops/docs/foundations.md
+          - Delivery and GitOps: tracks/devops/docs/delivery.md
+          - Routing and DNS: tracks/devops/docs/routing-and-dns.md
+          - Identity: tracks/devops/docs/identity.md
+          - Stateful services: tracks/devops/docs/stateful-services.md
+      - Operating procedures:
+          - Overview: tracks/devops/sops/index.md
+          - Status and triage: tracks/devops/sops/status-and-triage.md
+          - Incident response: tracks/devops/sops/incident-response.md
+          - Change and rollback: tracks/devops/sops/change-and-rollback.md
+          - Backup and restore: tracks/devops/sops/backup-and-restore.md
+          - Secrets and access: tracks/devops/sops/secrets-and-access.md
+          - Patching: tracks/devops/sops/patching.md
+      - Toy status service: examples/status-service/index.md
+  - More tracks:
+      - Product · planned: tracks/product/index.md
+      - Development · planned: tracks/development/index.md
+  - Reference:
+      - Public documentation: REFERENCES.md
+      - Safety and credentials: SECURITY.md
+      - Contributing: CONTRIBUTING.md
+      - Validation record: VALIDATION.md
+      - Public release review: PUBLIC-RELEASE.md
+      - Publishing guide: PUBLISHING.md
+      - Third-party notices: third-party-notices.md
