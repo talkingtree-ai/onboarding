@@ -1,0 +1,21 @@
+# TLS opt-in startup configuration. HTTP remains available for comparison.
+entryPoints:
+  web:
+    address: ":8080"
+  websecure:
+    address: ":8443"
+
+providers:
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+
+api:
+  dashboard: false
+
+log:
+  level: INFO
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false

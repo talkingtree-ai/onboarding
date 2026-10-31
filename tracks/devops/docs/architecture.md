@@ -13,9 +13,11 @@ The technology names below reflect a technology-level inventory. Versions, deplo
 | Containers | Docker, Compose, containerd | Image versus running container, networks, volumes, runtime ownership | [Containers lab](../labs/01-containers/); K3s uses its own runtime |
 | Cluster delivery | K3s, Kubernetes, Flux, Kustomize, Helm | Desired state, controllers, health, drift, release recovery | [K3s](../labs/03-k3s/) and [Flux](../labs/04-flux/) on a local disposable cluster |
 | Platform resources | Terraform; cloud networking, compute, registries, storage, identity | Plans, state, ownership, dependency graphs | [Terraform lab](../labs/02-terraform/) uses local resources; cloud services are reading only |
-| Identity and edge | Auth0 OIDC/OAuth, DNS, TLS, CDN/WAF, Cloudflare | Authentication versus authorization, redirects, trust boundaries, origin health | [Optional personal identity study](identity.md); no public hostname required |
+| Identity and edge | Auth0 OIDC/OAuth, DNS, TLS, CDN/WAF, Cloudflare, Traefik reverse proxy | Authentication versus authorization, redirects, trust boundaries, origin health | [Routing and local DNS lab](../labs/07-routing-dns/README.md) and [optional personal identity study](identity.md); no public hostname required |
 | Cluster extensions | cert-manager, External Secrets Operator, SOPS, Flux image automation, Traefik | Controllers that manage certificates, secrets, images, and routing | [Delivery reading](delivery.md); these are not all installed by the labs |
-| Operations | Linux/systemd/cgroups, Uptime Kuma, Fluent Bit, monitoring and backups | Ownership, limits, evidence, alert meaning, recovery | [Foundations](foundations.md) and [practice SOPs](../sops/README.md) |
+| Operations | Linux/systemd/cgroups, logs, monitoring and backups | Ownership, limits, evidence, alert meaning, recovery | [Foundations](foundations.md) and [practice SOPs](../sops/README.md) |
+
+Traefik routes incoming requests to backends using host/path rules and optional middleware. The [routing guide](routing-and-dns.md) explains its relationship to DNS and TLS. The standalone Compose lab runs Traefik and a local CoreDNS teaching server; CoreDNS here is a training substitute, not a statement about company DNS hosting. Lab 03 keeps bundled K3s ingress disabled so its deployment exercise remains separate.
 
 ## A generic application request
 

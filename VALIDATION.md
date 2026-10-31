@@ -26,6 +26,20 @@ SOPS v3.13.3 and age v1.3.2 passed both synthetic YAML encryption/decryption rou
 
 Downloaded validation binaries were checked against upstream checksums or release asset digests. This is an integrity check, not a claim of independent signature or supply-chain verification. These are teaching configurations; no production readiness claim follows from a successful local check.
 
+## Traefik and private DNS extension
+
+Lab 07 was verified on Linux amd64 with Compose v5.6.0, Traefik v3.7.17, and CoreDNS v1.15.0. Both base and optional TLS Compose configurations parsed successfully. Live checks covered:
+
+- Two hostname routes returning distinct synthetic backend responses; unmatched hosts and the unconfigured CNAME hostname returning 404.
+- Authoritative A, CNAME, TXT, NS, and SOA answers; matching UDP/TCP lookups; NXDOMAIN for a missing name and NOERROR for an existing name without an AAAA record.
+- Live TTL and TXT changes, serial-based zone reload, and rollback using a higher SOA serial.
+- Adding and removing an HTTP hostname router through the watched file provider without recreating the proxy.
+- A stopped backend returning 502 while the other route and DNS remained available, followed by recovery.
+- HTTPS success for both SAN names using per-request certificate trust, plus rejection of an untrusted certificate and a hostname mismatch.
+- Project-scoped cleanup of the four containers and both networks. Generated local keys/certificates were removed after testing, and the existing development stack remained healthy.
+
+Testing corrected host-port publication by separating the internal backend network from the proxy/DNS bridge. CoreDNS retains its binary's declared `NET_BIND_SERVICE` capability to permit startup; other capability drops, non-root execution, and read-only roots remain configured. The lab documents this image-specific behavior. No public DNS record, company domain, default resolver, hosts file, or trust store was changed. The existing K3s/Flux runtime was unaffected and was not repeated for this extension.
+
 ## Repeat relevant checks
 
 From the repository root:
@@ -34,6 +48,7 @@ From the repository root:
 python3 scripts/verify.py
 python3 -m unittest discover -s examples/status-service -p 'test_*.py'
 docker compose -f tracks/devops/labs/01-containers/compose.yaml config --quiet
+docker compose -f tracks/devops/labs/07-routing-dns/compose.yaml config --quiet
 terraform -chdir=tracks/devops/labs/02-terraform fmt -check
 kubectl kustomize tracks/devops/labs/03-k3s/manifests > /dev/null
 kubectl kustomize tracks/devops/labs/04-flux/app > /dev/null
@@ -41,8 +56,10 @@ kubectl kustomize tracks/devops/labs/04-flux/app > /dev/null
 
 The Terraform README describes its complete local lifecycle. The container, K3s, Flux, and secrets guides describe live checks and cleanup; run them in a disposable environment if their runtime files change.
 
+The [routing lab](tracks/devops/labs/07-routing-dns/README.md) describes its separate DNS, HTTP, and optional HTTPS checks. Generate its disposable certificate before validating or starting the TLS overlay.
+
 ## Limits
 
-The optional Auth0 walkthrough is a documented exercise; no tenant or client was created during preparation. The stateful-services module is a design exercise rather than an installed database stack. CI, managed secrets, edge routing, certificate issuance, cloud infrastructure, multi-node availability, real document processing, and paid AI integrations are reading topics only. They are not deployed by the labs.
+The optional Auth0 walkthrough is a documented exercise; no tenant or client was created during preparation. The stateful-services module is a design exercise rather than an installed database stack. CI, managed secrets, public edge services, public certificate issuance, cloud infrastructure, multi-node availability, real document processing, and paid AI integrations are reading topics only. They are not deployed by the labs. Lab 07's local reverse proxy, private DNS, and self-signed certificate are separate from those public services.
 
 The integration environment is Linux amd64. macOS, Windows/WSL2, arm64, alternate Docker backends, and disconnected installations require separate verification. Lab resource limits constrain workloads but do not reserve capacity on the host. Upstream tags, release availability, and free-plan terms can change. Review dependencies and licensing before redistributing a revision.

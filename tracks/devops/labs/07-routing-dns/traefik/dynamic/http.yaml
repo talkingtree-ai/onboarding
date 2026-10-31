@@ -1,0 +1,20 @@
+# Routing configuration: watched by the file provider. No Docker socket needed.
+http:
+  routers:
+    notes:
+      entryPoints: [web]
+      rule: "Host(`notes.onboarding.test`)"
+      service: notes
+    status:
+      entryPoints: [web]
+      rule: "Host(`status.onboarding.test`)"
+      service: status
+  services:
+    notes:
+      loadBalancer:
+        servers:
+          - url: "http://notes:8080"
+    status:
+      loadBalancer:
+        servers:
+          - url: "http://status:8080"

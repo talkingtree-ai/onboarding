@@ -14,8 +14,11 @@ Explore how a small application moves from a local process to a reconciled Kuber
 | 5 | [SOPS and age](labs/05-secrets/README.md), [secrets and access](sops/secrets-and-access.md) | Encryption, key custody, least privilege, and rotation |
 | 6 | [Identity](docs/identity.md), [stateful services](docs/stateful-services.md) | Authentication versus authorization, persistence, caching, search, and restore strategy |
 | 7 | [Operations capstone](labs/06-operations/README.md), [SOP library](sops/README.md) | Diagnose a failure, record a change, restore data, and explain evidence |
+| 8 | [Traefik and local DNS](labs/07-routing-dns/README.md), [routing guide](docs/routing-and-dns.md) | Manage a private DNS zone, route hostnames, inspect TLS, and distinguish DNS, proxy, and backend failures |
 
 Each lab stands alone where practical. Lab 4 reuses the cluster and image from lab 3. The secrets lab needs neither Kubernetes nor Auth0. Only the optional identity walkthrough uses a personal hosted account. Reading the full path can take a few evenings; installing and experimenting can take longer. There is no completion target.
+
+Lab 7 uses standalone Compose and can follow the containers lab directly. Its reserved `.test` names, authoritative DNS server, and local certificate need no registered domain, public DNS account, or company domain access. You can practice without changing your computer's resolver or hosts file.
 
 ## Concepts worth practicing
 

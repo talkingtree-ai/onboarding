@@ -1,0 +1,24 @@
+# Opt in only after running ./generate-cert.sh. Merge with compose.yaml.
+services:
+  proxy:
+    ports:
+      - "127.0.0.1:18443:8443"
+    volumes:
+      - type: bind
+        source: ./tls/static.yaml
+        target: /etc/traefik/traefik.yaml
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./tls/dynamic
+        target: /etc/traefik/dynamic
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./.local/certs
+        target: /certs
+        read_only: true
+        bind:
+          create_host_path: false

@@ -33,7 +33,15 @@ These are upstream learning resources, not links to company systems. The guides 
 - [Kubernetes concepts](https://kubernetes.io/docs/concepts/)
 - [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
 - [Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/), [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/), [Pod security](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- [Helm](https://helm.sh/docs/), [Traefik Kubernetes routing](https://doc.traefik.io/traefik/providers/kubernetes-ingress/), [cert-manager](https://cert-manager.io/docs/)
+- [Helm](https://helm.sh/docs/), [Traefik Kubernetes routing](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-ingress/), [cert-manager](https://cert-manager.io/docs/)
+
+## Reverse proxy and local DNS
+
+- [Traefik file provider](https://doc.traefik.io/traefik/reference/install-configuration/providers/others/file/), [HTTP router rules](https://doc.traefik.io/traefik/reference/routing-configuration/http/routing/rules-and-priority/), [TLS certificates](https://doc.traefik.io/traefik/reference/routing-configuration/http/tls/tls-certificates/)
+- [CoreDNS file-backed zones](https://coredns.io/plugins/file/)
+- [DNS concepts: RFC 1034](https://www.rfc-editor.org/rfc/rfc1034), [zone-file format: RFC 1035](https://www.rfc-editor.org/rfc/rfc1035)
+- [IANA special-use names](https://www.iana.org/assignments/special-use-domain-names), [reserved testing domains: RFC 2606](https://www.rfc-editor.org/rfc/rfc2606)
+- [curl hostname overrides and certificate verification](https://curl.se/docs/manpage.html)
 
 ## GitOps and secrets
 
@@ -48,11 +56,9 @@ These are upstream learning resources, not links to company systems. The guides 
 ## Identity, applications, and data
 
 - [Auth0 documentation](https://auth0.com/docs), [pricing and free-plan terms](https://auth0.com/pricing)
-- [OpenID Connect](https://openid.net/developers/how-connect-works/)
 - [OAuth authorization code with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)
 - [Next.js documentation](https://nextjs.org/docs), [FastAPI](https://fastapi.tiangolo.com/), [Flask](https://flask.palletsprojects.com/)
 - [MongoDB documentation](https://www.mongodb.com/docs/), [Qdrant](https://qdrant.tech/documentation/), [Valkey](https://valkey.io/docs/), [SeaweedFS](https://github.com/seaweedfs/seaweedfs/wiki)
-- [OpenTelemetry](https://opentelemetry.io/docs/), [Prometheus](https://prometheus.io/docs/introduction/overview/), [Fluent Bit](https://docs.fluentbit.io/manual), [Uptime Kuma](https://github.com/louislam/uptime-kuma)
 
 ## Cloud concepts — reading only
 

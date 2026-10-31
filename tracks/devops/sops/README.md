@@ -11,4 +11,6 @@ These are generic learning templates for your own disposable lab. They are not c
 | [Secrets and access](secrets-and-access.md) | Reason about least privilege, rotation, and revocation |
 | [Patching](patching.md) | Upgrade one layer while preserving recovery options |
 
+For local DNS record changes, the [routing guide](../docs/routing-and-dns.md#practice-a-dns-change-and-rollback) adds a zone-specific change and rollback exercise using the private lab domain.
+
 For local notes, copy the relevant template into an ignored scratch directory. Write UTC timestamps, the selected lab/context, the observation, and the result. Do not collect tokens, cookies, secrets, sensitive URLs, or personal data. A concise reproducible observation is more useful than a large unsanitized log dump.

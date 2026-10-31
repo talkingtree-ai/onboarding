@@ -1,0 +1,16 @@
+$ORIGIN onboarding.test.
+$TTL 60
+@ IN SOA ns.onboarding.test. hostmaster.onboarding.test. (
+    2026103001 ; serial: increase for every zone edit, including rollback
+    3600       ; refresh
+    600        ; retry
+    86400      ; expire
+    30         ; negative-cache TTL
+)
+@             IN NS    ns.onboarding.test.
+@             IN A     127.0.0.1
+ns            IN A     127.0.0.1
+notes         IN A     127.0.0.1
+status        IN A     127.0.0.1
+www           IN CNAME notes.onboarding.test.
+_verification IN TXT   "onboarding-lab-only-v1"

@@ -15,13 +15,14 @@ Install only tools needed for the lab you choose. Use the official installation 
 | Tool | Needed for | Selection |
 | --- | --- | --- |
 | Bash, Git, curl, Python 3 | General work, verification, toy app | Python 3.12 or newer |
-| Docker Engine / CLI + Compose plugin | Labs 1, 3, 4 | A supported stable Engine and Compose v2+ command syntax (`docker compose`) |
+| Docker Engine / CLI + Compose plugin | Labs 1, 3, 4, 7 | A supported stable Engine and Compose v2+ command syntax (`docker compose`) |
 | Terraform CLI | Lab 2 | 1.6 or newer within 1.x; validation here used 1.16.5 |
 | k3d | Labs 3–4 | v5.9.0 |
 | kubectl | Labs 3–4 | v1.35.x for the pinned K3s 1.35 lab |
 | Flux CLI | Lab 4 | v2.9.4 |
 | jq | Labs 3–4 helpers | Available from the OS package manager |
 | SOPS and age / age-keygen | Lab 5 only | Tested with SOPS 3.13.3 and age 1.3.2 |
+| dig; OpenSSL for optional HTTPS | Lab 7 only | OS DNS tools and OpenSSL |
 
 The cluster lab pins K3s `v1.35.9-k3s1`. These are reproducible teaching selections, not a promise that every version is the newest release or an instruction to downgrade an existing machine. Use a disposable VM to keep separate tool versions when needed. See [references](../../REFERENCES.md) for official install and release pages. Keep kubectl within its [supported version skew](https://kubernetes.io/releases/version-skew-policy/) from the API server.
 
@@ -33,6 +34,8 @@ sudo apt-get install git curl python3 jq ca-certificates
 ```
 
 Install Docker Engine **and its Compose plugin** using Docker's distribution-specific guide. Terraform, k3d, kubectl, Flux, and SOPS have their own official release/install instructions. Check your downloaded release before adding it to `PATH`; the guides below do not silently install system packages.
+
+For lab 7 on Ubuntu, `sudo apt-get install dnsutils openssl` supplies `dig` and the optional local certificate tool. The lab runs DNS in a container on a high loopback port; it does not install a system DNS server or alter resolver configuration.
 
 ## Verify your environment
 
@@ -61,6 +64,8 @@ ss -ltn
 ```
 
 `ss` is a Linux command; use your OS equivalent outside the VM. The examples use **18080** for Compose, **16443** for the Kubernetes API, **15100** for the local registry, **18083** for the direct Kubernetes service, and **18084** for the Flux-managed service. All host listeners bind to `127.0.0.1`. If a port is occupied, identify the owner and stop or reconfigure your own lab deliberately; do not kill an unrelated process.
+
+Lab 7 separately uses **15353 UDP and TCP** for DNS, **18085 TCP** for HTTP, and optional **18443 TCP** for HTTPS. It needs Docker, curl, and dig; no cluster or Flux installation is needed.
 
 ## Work in the right directory
 

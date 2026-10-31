@@ -1,0 +1,19 @@
+# Startup configuration: changing this file requires recreating the proxy.
+entryPoints:
+  web:
+    address: ":8080"
+
+providers:
+  file:
+    directory: /etc/traefik/dynamic
+    watch: true
+
+api:
+  dashboard: false
+
+log:
+  level: INFO
+
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false

@@ -15,6 +15,8 @@ Use a disposable local lab or VM. Commands here are diagnostic examples; select 
 
 For a local service, publish explicitly to loopback and check the actual listener. [Docker's port publishing documentation](https://docs.docker.com/engine/network/port-publishing/) explains why an omitted host address can expose a port on every host interface. VM NAT and firewall configuration matter too; loopback inside the VM is not host loopback.
 
+Practice these boundaries in the [Traefik and local DNS lab](../labs/07-routing-dns/README.md). It serves a private `.test` zone, then routes two hostnames to separate toy services. The [routing guide](routing-and-dns.md) explains why DNS lookup, TLS server identity, and HTTP host matching can fail independently.
+
 ## Diagnose before restarting
 
 These examples do not start services or change settings:
@@ -64,6 +66,6 @@ Use a small number of meaningful signals: request success rate, latency percenti
 - **Synthetic workflow:** can a user complete a small authorized operation?
 - **Reconciliation health:** has the desired configuration actually converged?
 
-A liveness probe that depends on every downstream service can create restart cascades. A synthetic check should use synthetic records, clean up afterward, and avoid storing tokens in results. Uptime Kuma is an example of [self-hosted availability monitoring](https://github.com/louislam/uptime-kuma). Fluent Bit's [pipeline model](https://docs.fluentbit.io/manual/concepts/data-pipeline) helps explain log inputs, filtering, buffering, and outputs. Logs need retention and redaction; collecting more data is not automatically better visibility.
+A liveness probe that depends on every downstream service can create restart cascades. A synthetic check should use synthetic records, clean up afterward, and avoid storing tokens in results. Trace logs through collection, filtering, buffering, and storage, then decide what evidence is useful. Logs need retention and redaction; collecting more data is not automatically better visibility.
 
 Try this locally: stop only the toy application, inspect the symptom, and predict which checks remain green. Restart it through the lab's supported command and verify the observable outcome. For cluster failures, use the official [application troubleshooting guide](https://kubernetes.io/docs/tasks/debug/debug-application/).

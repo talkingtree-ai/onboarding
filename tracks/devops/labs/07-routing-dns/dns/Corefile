@@ -1,0 +1,7 @@
+# Authoritative-only private zone. No forwarding, recursion or public resolver.
+onboarding.test:1053 {
+    errors
+    file /etc/coredns/db.onboarding.test onboarding.test {
+        reload 5s
+    }
+}

@@ -34,6 +34,8 @@ The essential loop is: fetch source → render → apply → assess → repeat. 
 
 The Flux lab uses a local source; it does not require bootstrapping a company or personal GitHub repository. A local source is a teaching substitute for a protected remote repository. Remote GitOps adds review rules, scoped deploy credentials, trusted source verification, and availability concerns.
 
+The [Traefik and local DNS lab](../labs/07-routing-dns/README.md) is a separate Compose exercise. It teaches proxy routing before introducing Kubernetes Ingress. Lab 03 disables the bundled Traefik controller; creating an Ingress there alone would not make a route work. See the [routing guide](routing-and-dns.md) for the controller, IngressClass, Service, and DNS relationship.
+
 ## Extensions worth recognizing
 
 | Extension | Responsibility | Question to ask during a failure | Official reading |

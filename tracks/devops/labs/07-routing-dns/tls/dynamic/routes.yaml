@@ -1,0 +1,42 @@
+http:
+  routers:
+    notes:
+      entryPoints: [web]
+      rule: "Host(`notes.onboarding.test`)"
+      service: notes
+    status:
+      entryPoints: [web]
+      rule: "Host(`status.onboarding.test`)"
+      service: status
+    notes-tls:
+      entryPoints: [websecure]
+      rule: "Host(`notes.onboarding.test`)"
+      service: notes
+      tls: {}
+    status-tls:
+      entryPoints: [websecure]
+      rule: "Host(`status.onboarding.test`)"
+      service: status
+      tls: {}
+  services:
+    notes:
+      loadBalancer:
+        servers:
+          - url: "http://notes:8080"
+    status:
+      loadBalancer:
+        servers:
+          - url: "http://status:8080"
+
+tls:
+  certificates:
+    - certFile: /certs/local.crt
+      keyFile: /certs/local.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/local.crt
+        keyFile: /certs/local.key
+  options:
+    default:
+      minVersion: VersionTLS12

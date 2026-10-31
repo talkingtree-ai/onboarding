@@ -23,6 +23,8 @@ This is self-study material. There are no deadlines, submissions, hiring evaluat
 
 The practical path starts with a tiny Python HTTP service, runs it in Docker Compose, explores Terraform's local state lifecycle, then deploys the service into a single-node K3s cluster using k3d. Flux reconciles versioned manifests from a local OCI registry, so the GitOps exercise needs no hosted Git repository. A separate SOPS/age exercise teaches encryption with locally generated disposable keys.
 
+The [Traefik and local DNS lab](tracks/devops/labs/07-routing-dns/README.md) adds host-based reverse proxy routing, a private `.test` DNS zone, record changes, failure diagnosis, and optional local HTTPS. No domain purchase, external DNS service, company domain, or system resolver change is needed.
+
 The default local stack is intentionally small. K3s in Docker teaches Kubernetes behavior; it does not reproduce a production cluster's hosts, networking, high availability, or security boundaries. Terraform's core lab manages local state objects and creates no cloud resources. Read the [technology map](tracks/devops/docs/architecture.md) for those distinctions.
 
 ## Cost and accounts

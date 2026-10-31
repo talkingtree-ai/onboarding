@@ -1,0 +1,105 @@
+name: onboarding-routing
+
+x-hardened: &hardened
+  user: "10001:10001"
+  read_only: true
+  tmpfs:
+    - /tmp:size=16m,mode=1777
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  cpus: 0.25
+  mem_limit: 128m
+  pids_limit: 64
+  restart: "no"
+  stop_grace_period: 10s
+  networks:
+    - lab
+
+x-status: &status
+  <<: *hardened
+  build:
+    context: ../../../../examples/status-service
+  image: onboarding-status:local
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/readyz', timeout=2).read()"]
+    interval: 5s
+    timeout: 3s
+    retries: 5
+    start_period: 5s
+
+services:
+  notes:
+    <<: *status
+    environment:
+      APP_VERSION: "1.0.0"
+      APP_ENV: local-routing
+      DATA_DIR: /tmp
+      MESSAGE: "Notes backend: a synthetic training response."
+
+  status:
+    <<: *status
+    environment:
+      APP_VERSION: "1.0.0"
+      APP_ENV: local-routing
+      DATA_DIR: /tmp
+      MESSAGE: "Status backend: a synthetic training response."
+
+  proxy:
+    <<: *hardened
+    # Public release tag; a tag is not a content digest. Review periodically.
+    image: traefik:v3.7.17
+    command: ["--configFile=/etc/traefik/traefik.yaml"]
+    networks:
+      - lab
+      - edge
+    depends_on:
+      notes:
+        condition: service_healthy
+      status:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:18085:8080"
+    volumes:
+      - type: bind
+        source: ./traefik/static.yaml
+        target: /etc/traefik/traefik.yaml
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./traefik/dynamic
+        target: /etc/traefik/dynamic
+        read_only: true
+        bind:
+          create_host_path: false
+
+  dns:
+    <<: *hardened
+    image: coredns/coredns:1.15.0
+    # The official binary has a NET_BIND_SERVICE file capability. Keep that
+    # one capability in the bounding set so exec works; no privileged mode.
+    # The configured listener still uses high container port 1053.
+    cap_add:
+      - NET_BIND_SERVICE
+    networks:
+      - edge
+    command: ["-conf", "/etc/coredns/Corefile"]
+    ports:
+      - "127.0.0.1:15353:1053/udp"
+      - "127.0.0.1:15353:1053/tcp"
+    volumes:
+      - type: bind
+        source: ./dns
+        target: /etc/coredns
+        read_only: true
+        bind:
+          create_host_path: false
+
+networks:
+  lab:
+    internal: true
+  # Docker needs a normal bridge for published host ports. Publish only on
+  # host loopback; application containers remain on the internal lab network.
+  edge: {}
