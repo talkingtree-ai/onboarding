@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: onboarding-gitops
+resources:
+  - ../../03-k3s/manifests
+replicas:
+  - name: status
+    count: 1
+patches:
+  - target:
+      kind: Namespace
+      name: onboarding-demo
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: onboarding-gitops
+  - target:
+      kind: ConfigMap
+      name: status-config
+    patch: |-
+      - op: replace
+        path: /data/MESSAGE
+        value: hello from flux

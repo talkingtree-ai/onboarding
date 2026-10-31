@@ -1,0 +1,25 @@
+# Personal lab data and credentials must stay local.
+.local/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*kubeconfig*
+!kubeconfig.example
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+.terraform/
+crash.log
+crash.*.log
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+*.log

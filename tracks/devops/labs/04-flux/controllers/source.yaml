@@ -1,0 +1,13 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: status
+  namespace: flux-system
+spec:
+  interval: 1m
+  timeout: 30s
+  url: oci://k3d-onboarding-registry.localhost:5000/onboarding/manifests
+  ref:
+    tag: v1
+  # Only this disposable, loopback-published registry uses HTTP.
+  insecure: true

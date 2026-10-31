@@ -1,0 +1,5 @@
+# Synthetic values only. Copy to terraform.tfvars for your local exercise.
+environment  = "sandbox"
+service_name = "status-service"
+replicas     = 1
+release      = "v1"
